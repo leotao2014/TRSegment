@@ -100,7 +100,7 @@ class TRSegmentContentView: TRAbstractSegmentContentView {
         }
     }
     
-    init(parentVC: UIViewController, childVCs: [UIViewController]) {
+    init(parentVC: UIViewController?, childVCs: [UIViewController]) {
         self.parentVC = parentVC
         self.childVCs = childVCs
         

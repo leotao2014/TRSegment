@@ -47,14 +47,7 @@ class TRSegmentBuilder {
     func build() -> TRSegmentBinder {
         let segment = TRSegment(titles: self.titles, selectedIndex: self.selectedIndex, config: self.config)
         
-        var vc: UIViewController
-        if let parentVC = parentVC {
-            vc = parentVC
-        } else {
-            vc = UIViewController()
-        }
-        
-        let content = TRSegmentContentView(parentVC: vc, childVCs: self.childVCs)
+        let content = TRSegmentContentView(parentVC: self.parentVC, childVCs: self.childVCs)
         let binder = TRSegmentBinder(segment: segment, content: content)
         
         return binder

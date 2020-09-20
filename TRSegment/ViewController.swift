@@ -45,11 +45,20 @@ class ViewController: UIViewController {
             maker.left.right.bottom.equalToSuperview()
             maker.top.equalTo(binder.segment.snp.bottom)
         }
+        
+        binder.segment.delegate = self
+        binder.content.delegate = self
     }
 }
 
 extension ViewController: TRSegmentDelegate {
-    func didClick(at index: Int, segment: TRAbstractSegment) {
+    func segment(_ segment: TRAbstractSegment, didSelect index: UInt) {
+        print(#function)
+    }
+}
+
+extension ViewController: TRSegmentContentViewDelegate {
+    func segmentContentView(_ contentView: TRAbstractSegmentContentView, didSelectedIndex index: UInt) {
         print(#function)
     }
 }

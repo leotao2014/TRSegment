@@ -163,7 +163,6 @@ class TRSegment: TRAbstractSegment {
         
         let btn = self.btns[Int(index)]
         makeSelcted(btn: btn, animated: animated)
-        segment(self, didSelect: index)
     }
 }
 
@@ -223,6 +222,7 @@ extension TRSegment {
 extension TRSegment {
     @objc func onClick(btn: UIButton) {
         makeSelcted(btn: btn, animated: true)
+        segment(self, didClick: UInt(btn.tag))
     }
 }
 
@@ -232,17 +232,12 @@ extension TRSegment {
             return
         }
         
-        
-        segment(self, didClick: UInt(btn.tag))
-        segment(self, didSelect: UInt(btn.tag))
-        
-        makeBtnSelected(btn: self.selectedBtn, selected: false)
         self.selectedBtn?.isSelected = false
-
-        makeBtnSelected(btn: btn, selected: true)
         btn.isSelected = true
-        
         self.selectedBtn = btn
+        
+        segment(self, didSelect: UInt(btn.tag))
+        updateBtnStyle(btn: btn, selected: true)
         
         if animated {
             let nextFrame = self.indicatorFrame()
@@ -254,7 +249,7 @@ extension TRSegment {
         }
     }
     
-    private func makeBtnSelected(btn: UIButton?, selected: Bool) {
+    private func updateBtnStyle(btn: UIButton?, selected: Bool) {
         guard let btn = btn else { return }
         
         let btnCenter = btn.center.x
