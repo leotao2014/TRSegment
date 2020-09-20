@@ -1,0 +1,6 @@
+framework module Pods_TRSegment {
+  umbrella header "Pods-TRSegment-umbrella.h"
+
+  export *
+  module * { export * }
+}
