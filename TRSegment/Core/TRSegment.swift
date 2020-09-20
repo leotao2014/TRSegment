@@ -72,6 +72,8 @@ class TRSegment: TRAbstractSegment {
     private var selectedBtn: UIButton?
     private var initialSelectedIndex: UInt
     
+    private var lastWidth: CGFloat = 0
+    
     convenience init(titles: [String], selecteIndex: UInt = 0) {
         self.init(titles: titles, selectedIndex: selecteIndex, config: nil)
     }
@@ -115,6 +117,12 @@ class TRSegment: TRAbstractSegment {
     
     override func layoutSubviews() {
         super.layoutSubviews()
+        
+        guard lastWidth != self.bounds.width else {
+            return
+        }
+        
+        lastWidth = self.bounds.width
         
         guard btns.count > 0 else {
             return
@@ -233,11 +241,14 @@ extension TRSegment {
         }
         
         self.selectedBtn?.isSelected = false
+        updateBtnStyle(btn: self.selectedBtn, selected: false)
+        
         btn.isSelected = true
         self.selectedBtn = btn
+        updateBtnStyle(btn: btn, selected: true)
         
         segment(self, didSelect: UInt(btn.tag))
-        updateBtnStyle(btn: btn, selected: true)
+        
         
         if animated {
             let nextFrame = self.indicatorFrame()
