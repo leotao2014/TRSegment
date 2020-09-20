@@ -167,7 +167,7 @@ class TRSegmentContentView: TRAbstractSegmentContentView {
         
         childVC.beginAppearanceTransition(true, animated: false)
         
-        if (firstAdd) {
+        if firstAdd {
             scrollView.addSubview(childVC.view)
             childVC.view.frame = CGRect(x: CGFloat(index) * self.scrollView.bounds.width, y: 0, width: self.scrollView.bounds.width, height: self.scrollView.bounds.height)
         }
@@ -178,7 +178,7 @@ class TRSegmentContentView: TRAbstractSegmentContentView {
         
         childVC.endAppearanceTransition()
         
-        if (firstAdd) {
+        if firstAdd {
             childVC.didMove(toParent: parentVC)
         }
         
